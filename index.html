@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>My Instagram - Login</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#fafafa;
+margin:0;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.login-box{
+background:white;
+padding:30px;
+border:1px solid #ddd;
+border-radius:10px;
+text-align:center;
+width:300px;
+}
+
+/* LOGO STYLE */
+.logo{
+width:80px;
+margin-bottom:10px;
+}
+
+.logo-text{
+font-size:32px;
+font-weight:bold;
+margin-bottom:20px;
+color:#ff4b7d;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+width:100%;
+padding:10px;
+background:#ff4b7d;
+border:none;
+color:white;
+border-radius:5px;
+font-weight:bold;
+cursor:pointer;
+}
+
+a{
+text-decoration:none;
+color:#ff4b7d;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+<!-- LOGO -->
+<img src="logo-camera.avif" class="logo">
+
+<div class="logo-text">My Instagram</div>
+
+<input id="username" type="text" placeholder="Username">
+
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="login()">Log in</button>
+
+<p>
+Don't have an account?
+<a href="register.html">Sign up</a>
+</p>
+
+</div>
+
+<script>
+
+async function login(){
+
+let username = document.getElementById("username").value
+let password = document.getElementById("password").value
+
+let res = await fetch("http://127.0.0.1:5000/api/login",{
+
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+username:username,
+password:password
+})
+
+})
+
+let data = await res.json()
+
+if(data.token){
+
+window.location.href="feed.html"
+
+}else{
+
+alert("Login failed")
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
+
+</body>
+</html>

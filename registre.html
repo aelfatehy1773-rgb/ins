@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Register</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#fafafa;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.box{
+background:white;
+padding:30px;
+border:1px solid #ddd;
+border-radius:10px;
+width:300px;
+text-align:center;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+width:100%;
+padding:10px;
+background:#ff4b7d;
+border:none;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Create Account</h2>
+
+<input id="username" type="text" placeholder="Username">
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="register()">Register</button>
+
+<p>
+<a href="index.html">Back to login</a>
+</p>
+
+</div>
+
+<script>
+
+async function register(){
+
+alert("Register button clicked")
+
+let username = document.getElementById("username").value
+let password = document.getElementById("password").value
+
+let res = await fetch("http://127.0.0.1:5000/api/register",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+username:username,
+password:password
+})
+
+})
+
+let data = await res.json()
+
+alert(data.message)
+
+}
+
+</script>
+
+</body>
+</html>
